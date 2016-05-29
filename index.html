@@ -102,8 +102,8 @@ window.onload = function(){
 	//个人技能
 	var oDivUl = document.getElementById("div2_ul");
 	var aCur = oDivUl.children;
-	for(var i = 0; i <aCur.length; i++){
-		lagou(aCur[i]);
+	for(var a = 0; a <aCur.length; a++){
+		lagou(aCur[a]);
 	}
 	
 	function getDir(oEvent,obj){		
@@ -177,15 +177,15 @@ window.onload = function(){
 	var oWorks = document.getElementById("works");
 	var aWorksLi = oWorks.getElementsByTagName("li");
 	var aWorksA = oWorks.getElementsByTagName("a");
-	for(var i=0;i<aWorksLi.length;i++){
+	for(var j=0;j<aWorksLi.length;j++){
 		(function(index){
-			aWorksLi[i].onmouseover = function(){
+			aWorksLi[j].onmouseover = function(){
 				move(aWorksA[index],{left:0});
 			};	
-			aWorksLi[i].onmouseout = function(){
+			aWorksLi[j].onmouseout = function(){
 				move(aWorksA[index],{left:-220});
 			};	
-		})(i);
+		})(j);
 	}
 };
 </script>
@@ -337,23 +337,23 @@ window.onload = function(){
                     <img src="img/03.jpg"/>
                 </li>
             	<li>
-                	<a>瀑布流</a>
+                	<a href="javascript:;">瀑布流</a>
                     <img src="img/04.jpg"/>
                 </li>
             	<li>
-                	<a>扣篮</a>
+                	<a href="javascript:;">扣篮</a>
                     <img src="img/05.jpg"/>
                 </li>
             	<li>
-                	<a>卖彩票</a>
+                	<a href="javascript:;">卖彩票</a>
                     <img src="img/06.jpg"/>
                 </li>
             	<li>
-                	<span>图片</span>
+                	<a href="javascript:;">图片</a>
                     <img src="img/07.jpg"/>
                 </li>
             	<li>
-                	<a>Apple Menu</a>
+                	<a href="javascript:;">Apple Menu</a>
                     <img src="img/08.jpg"/>
                 </li>
             </ul>
