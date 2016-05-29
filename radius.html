@@ -1,0 +1,96 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>圆周运动</title>
+<style>
+*{ margin:0; padding:0; list-style:none; font-family: "微软雅黑","张海山锐线体简"}
+#div1{width:500px;height:500px; border:#C30 solid 1px; border-radius:50%; position:absolute;left:50%;top:10%;margin-left:-250px;}
+.active{width:50px;height:50px;background:#ccc;line-height: 50px;text-align: center;color: #fff; border-radius:50%; position:absolute;left:0;top:0;margin-left:-25px;margin-top:-25px;}
+input{ font-size:40px; position:absolute;left:45%;top:45%;}
+</style>
+
+<script>
+window.onload=function(){
+	var oDiv1=document.getElementById('div1');
+	var oBtn=document.getElementById('btn1');
+	var r=oDiv1.offsetWidth/2;	
+	
+	var bl=true;
+	var arr = ['从','前','有','座','山','山','里','有','个','庙','庙','里','有','个','程','序','猿'];
+	var count=arr.length;
+	for(var i=0;i<count;i++){
+		var oBox=document.createElement('div');
+		oBox.className='active';
+		oBox.innerHTML = arr[i];
+		document.body.appendChild(oBox);
+		setPos(oBox,0);
+		oBox.rotate=0;
+	}
+	
+	
+	oBtn.onclick=function(){
+		var aBox=document.getElementsByClassName('active');
+		if(bl){
+			//展开
+			for(var i=0;i<aBox.length;i++){
+				//setPos(aBox[i],i*(90/(count-1)));
+				move(aBox[i],i*(360/count));	
+			}
+			oBtn.value='收';
+			oBtn.disabled=true;
+			bl=false;	
+		}else{
+			//收起
+			for(var i=0;i<aBox.length;i++){
+				//setPos(aBox[i],0);
+				move(aBox[i],0);	
+			}
+			oBtn.value='散';
+			oBtn.disabled=true;
+			bl=true;	
+		}
+	};
+	function move(obj,iTarget){
+		var start=obj.rotate;
+		var dis=iTarget-start;
+		var count=Math.round(700/30);
+		var n=0;
+		clearInterval(obj.timer);
+		obj.timer=setInterval(function(){
+			n++;
+			
+			var a=1-n/count;
+			var cur=start+dis*(1-a*a*a);
+			setPos(obj,cur);
+			obj.rotate=cur;
+			if(n==count){
+				clearInterval(obj.timer);
+				oBtn.disabled=false;
+			}	
+		},30);
+	}
+	function setPos(obj,ang){
+		var a=Math.sin(a2r(ang))*r;
+		var b=Math.cos(a2r(ang))*r;
+	
+		obj.style.left=oDiv1.offsetLeft+r+a+'px';
+		obj.style.top=oDiv1.offsetTop+r-b+'px';	
+	}
+			
+	
+	function a2r(n){
+		return 	n*Math.PI/180;
+	}
+	
+};
+</script>
+</head>
+
+<body>
+
+<div id="div1"><input type="button" value="散" id="btn1"></div>
+
+</body>
+</html>

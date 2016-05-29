@@ -2,13 +2,373 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>无标题文档</title>
+<title>Bearcheng个人简历</title>
+<link rel="stylesheet" href="css/annimate.css"/>
+<link rel="stylesheet" href="css/sweet.css"/>
 <style>
-#div1{ position:absolute; left:0; top:0; width:200px; height:200px; background:yellow;}
+*{margin:0;padding:0; list-style:none;font:12px "微软雅黑";}
+.wrap{width:1333px; margin:0 auto;}
+.wrap .box{ position:absolute; left:0;top:0;}
+.wrap .box .banner{ width:100%; position:absolute; top:0; left:0;}
+.wrap .box #banner{ position:fixed; right:50px; width:500px; top:50px; overflow:hidden; text-align:center; z-index:999;}
+.wrap .box #banner li{ float:left; margin:0 10px; width:100px; height:30px; font:20px/30px "微软雅黑";}
+.wrap .box .banner ol{ text-indent:2rem; width:660px; position:absolute; left:50%; top:200px; margin-left:-300px; overflow:hidden;}
+.wrap .box .banner ol li{ font:26px/40px "宋体"; float:left; opacity:0; filter:alpha(opacity:0);}
+.wrap .box{ position:relative;}
+.wrap .box>div{ height:833px;}
+.wrap .box div.div1{ background:url(img/bg_18.jpg) no-repeat;}
+.wrap .box div.div2{ position:relative; background:url(img/bg_19.png) no-repeat;}
+.wrap .box div.div3{position:relative; background:url(img/bg_20.jpg) no-repeat;}
+.wrap .box div.div4{ background:url(img/bg_21.png) no-repeat;}
+.wrap .box div.div5{ background:url(img/bg_22.jpg) no-repeat;}
+.wrap .box div.div6{ position:fixed; right:10px; top:50%; width:50px; height:250px; margin-top:-125px;}
+.wrap .box div.div6 ul{ width:10px; height:250px; overflow:hidden;}
+.wrap .box div.div6 ul li{ width:10px; height:10px; float:left; margin:20px auto; 
+background:#ccc; border-radius:50%;}
+.wrap .box div.div6 ul li.active,#banner li.active{ background:#9F0;}
+.wrap .box div.div2 ul{ position:absolute; left:0;top:200px; width:100%; overflow:hidden;margin:0 auto; overflow:hidden;}
+.wrap .box div.div2 ul li{ position:relative;width:265px; border:1px solid #ccc; margin-left:-1px; margin-bottom:-1px; float:left; background:#999; color:#333;height:150px;overflow:hidden;}
+div.div2 ul li div{ position:absolute; left:-266px; width:100%;height:150px; background:#7de87d; opacity:.5;}
+div.div2 ul li h3{ position:absolute;right:15px; top:20px;font:bold 40px/1.7 "impact";}
+div.div2 ul li span{position:absolute;right:10px;top:80px;}
+div.div2 ul li p{position:absolute;right:10px;bottom:20px;}
+div.div2 ul li img{ width:100%;}
+.div3 #works{ position:absolute; left:50%;top:100px; margin-left:-464px;width:928px; overflow:hidden;}
+.div3 #works li{position:relative; float:left; width:220px; height:175px; border:1px solid #ccc; margin:5px; overflow:hidden;}
+/*.div3 #works li a{position:absolute; width:100%;}*/
+.div3 #works li img{ width:100%; height:100%;}
+.div3 #works li a{ position:absolute; left:-220px; width:220px; height:175px; text-align:center; font:bold 20px/175px "微软雅黑";color:#999; background:#F6F; opacity:.5;}
 </style>
+<script src="js/move.js"></script>
+<script src="js/addMouseWheel.js"></script>
+<script>
+window.onload = function(){
+	var oWrap = document.getElementById("wrap");	
+	var oBox = document.getElementById("box");
+	var aBoxDiv = oBox.getElementsByTagName("div");
+		
+	var oHead = document.getElementById("head");	
+	var aHeadLi = oHead.getElementsByTagName("li");
+	
+	var oBanner = document.getElementById("banner");	
+	var aBannerLi = oBanner.getElementsByTagName("li");
+	
+	var oCom = document.getElementById("recommend");
+	var aComLi = oCom.getElementsByTagName("li");
+	var oDiv6 = document.getElementById("div6");
+	var aDivLi = oDiv6.getElementsByTagName("li");
+	//首页
+	var iNow =0;
+	var timer = null;
+	for(var i=0;i<aBannerLi.length;i++){
+		(function(index){
+			aDivLi[i].onclick = aBannerLi[i].onclick = function(){
+				iNow = index;
+				tab();
+			}	
+		})(i);
+	}
+	addMouseWheel(document,function(bDown){
+		if(bDown){
+			iNow++;
+			if(iNow==aBannerLi.length){
+				iNow = aBannerLi.length-1;
+			}
+		}else{
+			iNow--;
+			if(iNow==-1){
+				iNow = 0;
+			}	
+		}
+		tab();	
+	});
+	function tab(){
+		for(var i=0;i<aBannerLi.length;i++){
+			aBannerLi[i].className ="";
+			aDivLi[i].className ="";
+		}
+		aBannerLi[iNow].className ="active";
+		aDivLi[iNow].className ="active";
+		move(oBox,{"top":-aBoxDiv[0].offsetHeight*iNow},{duration:1500});
+	}
+	var i=0;
+	var timer=setInterval(function(){
+		move(aComLi[i],{opacity:1});
+		i++;
+		if(i==aComLi.length){
+			clearInterval(timer);
+		}	
+	},100);
+	//个人技能
+	var oDivUl = document.getElementById("div2_ul");
+	var aCur = oDivUl.children;
+	for(var i = 0; i <aCur.length; i++){
+		lagou(aCur[i]);
+	}
+	
+	function getDir(oEvent,obj){		
+		var x = oEvent.clientX - (obj.offsetLeft + obj.offsetWidth/2);
+		var y = (obj.offsetTop + obj.offsetHeight/2) - oEvent.clientY;
+		
+		// 0 左边 1 下  2 右  3 上 
+		return Math.round((Math.atan2(y,x)*180/Math.PI + 180)/90)%4;			
+	}
+	
+	function lagou(obj){
+	
+		obj.onmouseover = function(ev){
+			var oEvent = ev || event;
+			var n = getDir(oEvent,this);
+			var oSpan = this.children[0];
+			
+			var oFrom = oEvent.fromElement || oEvent.relatedTarget;
+			if(oFrom && obj.contains(oFrom)){
+				return;
+			}
+			
+			switch(n){
+				case 0://左边
+					oSpan.style.left = "-266px";
+					oSpan.style.top = "0";
+					break;
+				case 1://下边
+					oSpan.style.left = "0";
+					oSpan.style.top = "266px";
+					break;
+				case 2://右边
+					oSpan.style.left = "266px";
+					oSpan.style.top = "0";
+					break;
+				case 3://上边
+					oSpan.style.left = "0";
+					oSpan.style.top = "-266px";
+					break;
+			}
+			move(oSpan,{left:0,top:0});
+		};
+		
+		obj.onmouseout = function(ev){
+			var oEvent = ev || event;
+			var n = getDir(oEvent,this);
+			var oSpan = this.children[0];
+			
+			var oTo = oEvent.toElement || oEvent.relatedTarget;
+			if(oTo && obj.contains(oTo)){
+				return;
+			}
+			
+			switch(n){
+				case 0://左边 
+					move(oSpan,{left:-266,top:0});
+					break;
+				case 1://下边 
+					move(oSpan,{left:0,top:266});
+					break;
+				case 2://右边 
+					move(oSpan,{left:266,top:0});
+					break;
+				case 3://上边 
+					move(oSpan,{left:0,top:-266});
+					break;
+			} 
+		};
+	}
+	//作品展示
+	var oWorks = document.getElementById("works");
+	var aWorksLi = oWorks.getElementsByTagName("li");
+	var aWorksA = oWorks.getElementsByTagName("a");
+	for(var i=0;i<aWorksLi.length;i++){
+		(function(index){
+			aWorksLi[i].onmouseover = function(){
+				move(aWorksA[index],{left:0});
+			};	
+			aWorksLi[i].onmouseout = function(){
+				move(aWorksA[index],{left:-220});
+			};	
+		})(i);
+	}
+};
+</script>
 </head>
 
 <body>
-<div id="div1"></div>
+<div class="wrap" id="wrap">
+	<div class="box" id="box">
+        <ul id="banner">
+            <li class="active">首页</li>
+            <li>个人技能</li>
+            <li>作品展示</li>
+            <li>请联系我</li>
+        </ul>
+    	<div class="banner" id="head">
+        	<h3><img src="img/logo4.png"/></h3>
+            <ol id="recommend">
+            	<li>&nbsp;&nbsp;</li>
+            	<li>欢</li>
+            	<li>迎</li>
+            	<li>访</li>
+            	<li>问</li>
+            	<li>Bearcheng</li>
+            	<li>的</li>
+            	<li>个</li>
+            	<li>人</li>
+            	<li>网</li>
+            	<li>站</li>
+            	<li>，</li>
+            	<li>我</li>
+            	<li>是</li>
+            	<li>一</li>
+            	<li>名</li>
+            	<li>前</li>
+            	<li>端</li>
+            	<li>工</li>
+            	<li>程</li>
+            	<li>师</li>
+            	<li>，</li>
+            	<li>热</li>
+            	<li>衷</li>
+            	<li>于</li>
+            	<li>学</li>
+            	<li>习</li>
+            	<li>前</li>
+            	<li>端</li>
+            	<li>各</li>
+            	<li>种</li>
+            	<li>新</li>
+            	<li>技</li>
+            	<li>术</li>
+            	<li>，</li>
+            	<li>每</li>
+            	<li>天</li>
+            	<li>不</li>
+            	<li>是</li>
+            	<li>在</li>
+            	<li>找</li>
+            	<li>bug</li>
+            	<li>,</li>
+            	<li>就</li>
+            	<li>是</li>
+            	<li>在</li>
+            	<li>去</li>
+            	<li>找</li>
+            	<li>bug</li>
+            	<li>的</li>
+            	<li>路</li>
+            	<li>上</li>
+            	<li>..</li>
+            	<li>..</li>
+            </ol>
+        </div>
+        <div class="div1">
+        	
+        </div>
+        <div class="div2" id="div2">
+        	<ul id="div2_ul">
+            	<li>
+                	<div></div>
+                	<h3>IM</h3>
+                    <span>Mr.Xiong</span>
+                    <p>一个有追求的WEB前端</p>
+                </li>
+            	<li class="cur">
+                	<img src="img/logo1.jpg"/>
+                </li>
+            	<li>
+                	<div></div>
+                	<h3>JavaScript</h3>
+                    <span>ECMAScript DOM BOM</span>
+                    <p>熟练使用原生JS实现交互</p>
+                </li>
+            	<li>
+                	<div></div>
+                	<h3>HTML5</h3>
+                    <span>HTML-HTML5</span>
+                    <p>熟悉W3C标准，WEB语义化</p>
+                </li>
+            	<li>
+                	<div></div>
+                	<h3>CSS3</h3>
+                    <span>CSS-CSS3</span>
+                    <p>兼容多种浏览器</p>
+                </li>
+            	<li>
+                	<div></div>
+                	<h3>Jquery</h3>
+                    <span>Jquery</span>
+                    <p>熟练使用Jquery类库</p>
+                </li>
+            	<li>
+                	<div></div>
+                	<h3>Ajax</h3>
+                    <span>Ajax</span>
+                    <p>熟练使用Ajax技术及其原理</p>
+                </li>
+            	<li>
+                	<div></div>
+                	<h3>Seajs</h3>
+                    <span>模块化</span>
+                    <p>前端开发工程化</p>
+                </li>
+            	<li>
+                	<div></div>
+                	<h3>Design</h3>
+                    <span>良好的审美</span>
+                    <p>熟练使用PS，切图</p>
+                </li>
+            	<li>
+                	<div></div>
+                	<h3>More</h3>
+                </li>
+            	
+            </ul>
+        </div>
+        <div class="div3">
+        	<ul id="works">
+            	<li>
+                	<a href="autorun.html">轮播图</a>
+                    <img src="img/01.jpg"/>
+                </li>
+            	<li>
+                	<a href="radius.html">圆周运动</a>
+                    <img src="img/02.jpg"/>
+                </li>
+            	<li>
+                	<a href="pohto.html">照片墙</a>
+                    <img src="img/03.jpg"/>
+                </li>
+            	<li>
+                	<a>瀑布流</a>
+                    <img src="img/04.jpg"/>
+                </li>
+            	<li>
+                	<a>扣篮</a>
+                    <img src="img/05.jpg"/>
+                </li>
+            	<li>
+                	<a>卖彩票</a>
+                    <img src="img/06.jpg"/>
+                </li>
+            	<li>
+                	<span>图片</span>
+                    <img src="img/07.jpg"/>
+                </li>
+            	<li>
+                	<a>Apple Menu</a>
+                    <img src="img/08.jpg"/>
+                </li>
+            </ul>
+        </div>
+        <div class="div4"></div>
+        <div class="div5"></div>
+        <div class="div6" id="div6">
+        	<ul>
+            	<li class="active"></li>
+            	<li></li>
+            	<li></li>
+            	<li></li>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>
