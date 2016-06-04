@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="css/annimate.css"/>
 <link rel="stylesheet" href="css/sweet.css"/>
 <style>
-*{margin:0;padding:0; list-style:none;font:12px "微软雅黑";}
+*{margin:0;padding:0; list-style:none;font:12px "微软雅黑"; color:#000;}
 .wrap{width:1333px; margin:0 auto;}
 .wrap .box{ position:absolute; left:0;top:0;}
 .wrap .box .banner{ width:100%; position:absolute; top:0; left:0;}
@@ -15,29 +15,29 @@
 .wrap .box .banner ol{ text-indent:2rem; width:660px; position:absolute; left:50%; top:200px; margin-left:-300px; overflow:hidden;}
 .wrap .box .banner ol li{ font:26px/40px "宋体"; float:left; opacity:0; filter:alpha(opacity:0);}
 .wrap .box{ position:relative;}
-.wrap .box>div{ height:833px;}
-.wrap .box div.div1{ background:url(img/bg_18.jpg) no-repeat;}
-.wrap .box div.div2{ position:relative; background:url(img/bg_19.png) no-repeat;}
-.wrap .box div.div3{position:relative; background:url(img/bg_20.jpg) no-repeat;}
-.wrap .box div.div4{ background:url(img/bg_21.png) no-repeat;}
-.wrap .box div.div5{ background:url(img/bg_22.jpg) no-repeat;}
+.wrap .box>div{ height:643px;}
+.wrap .box div.div1{ background:url(img/bg_12.jpg) no-repeat;}
+.wrap .box div.div2{padding-top:150px; height:493px; position:relative; background:url(img/bg_13.jpg) no-repeat;}
+.wrap .box div.div3{padding-top:150px; height:493px; position:relative; background:url(img/bg_14.jpg) no-repeat;}
+.wrap .box div.div4{ background:url(img/bg_15.jpg) no-repeat;}
+.wrap .box div.div5{ background:url(img/bg_16.jpg) no-repeat;}
 .wrap .box div.div6{ position:fixed; right:10px; top:50%; width:50px; height:250px; margin-top:-125px;}
 .wrap .box div.div6 ul{ width:10px; height:250px; overflow:hidden;}
 .wrap .box div.div6 ul li{ width:10px; height:10px; float:left; margin:20px auto; 
 background:#ccc; border-radius:50%;}
 .wrap .box div.div6 ul li.active,#banner li.active{ background:#9F0;}
-.wrap .box div.div2 ul{ position:absolute; left:0;top:200px; width:100%; overflow:hidden;margin:0 auto; overflow:hidden;}
-.wrap .box div.div2 ul li{ position:relative;width:265px; border:1px solid #ccc; margin-left:-1px; margin-bottom:-1px; float:left; background:#999; color:#333;height:150px;overflow:hidden;}
-div.div2 ul li div{ position:absolute; left:-266px; width:100%;height:150px; background:#7de87d; opacity:.5;}
+.wrap .box div.div2 ul{ -position:absolute; width:100%; overflow:hidden;margin:0 auto; overflow:hidden;}
+
+.wrap .box div.div2 ul li{ position:relative;width:265px; border:1px solid #ccc; margin-left:-1px; margin-bottom:-1px; float:left; -background:#999; color:#333;height:150px;overflow:hidden;}
+div.div2 ul li div{ position:absolute; left:-266px; width:100%;height:150px; background:#7de87d; opacity:.7;}
 div.div2 ul li h3{ position:absolute;right:15px; top:20px;font:bold 40px/1.7 "impact";}
 div.div2 ul li span{position:absolute;right:10px;top:80px;}
 div.div2 ul li p{position:absolute;right:10px;bottom:20px;}
 div.div2 ul li img{ width:100%;}
-.div3 #works{ position:absolute; left:50%;top:100px; margin-left:-464px;width:928px; overflow:hidden;}
+.div3 #works{  margin:0 auto;width:928px; overflow:hidden;}
 .div3 #works li{position:relative; float:left; width:220px; height:175px; border:1px solid #ccc; margin:5px; overflow:hidden;}
-/*.div3 #works li a{position:absolute; width:100%;}*/
 .div3 #works li img{ width:100%; height:100%;}
-.div3 #works li a{ position:absolute; left:-220px; width:220px; height:175px; text-align:center; font:bold 20px/175px "微软雅黑";color:#999; background:#F6F; opacity:.5;}
+.div3 #works li a{ position:absolute; left:-220px; width:220px; height:175px; text-align:center; font:bold 20px/175px "微软雅黑";color:#FF0; background:#0F0; opacity:.7;}
 </style>
 <script src="js/move.js"></script>
 <script src="js/addMouseWheel.js"></script>
@@ -54,7 +54,7 @@ window.onload = function(){
 	var aBannerLi = oBanner.getElementsByTagName("li");
 	
 	var oCom = document.getElementById("recommend");
-	var aComLi = oCom.getElementsByTagName("li");
+ 	var aComLi = oCom.getElementsByTagName("li");
 	var oDiv6 = document.getElementById("div6");
 	var aDivLi = oDiv6.getElementsByTagName("li");
 	//首页
@@ -103,10 +103,14 @@ window.onload = function(){
 	var oDivUl = document.getElementById("div2_ul");
 	var aCur = oDivUl.children;
 	for(var a = 0; a <aCur.length; a++){
+		var r = parseInt(Math.random()*256);
+		var g = parseInt(Math.random()*256);
+		var b = parseInt(Math.random()*256);
+		aCur[a].style.background = "rgb("+r+","+g+","+b+")" 
 		lagou(aCur[a]);
 	}
 	
-	function getDir(oEvent,obj){		
+	function getDir(oEvent,obj){
 		var x = oEvent.clientX - (obj.offsetLeft + obj.offsetWidth/2);
 		var y = (obj.offsetTop + obj.offsetHeight/2) - oEvent.clientY;
 		
@@ -151,7 +155,10 @@ window.onload = function(){
 			var oEvent = ev || event;
 			var n = getDir(oEvent,this);
 			var oSpan = this.children[0];
-			
+			var r = parseInt(Math.random()*256);
+			var g = parseInt(Math.random()*256);
+			var b = parseInt(Math.random()*256);
+			oSpan.style.background = "rgb("+r+","+g+","+b+")"
 			var oTo = oEvent.toElement || oEvent.relatedTarget;
 			if(oTo && obj.contains(oTo)){
 				return;
@@ -176,16 +183,9 @@ window.onload = function(){
 	//作品展示
 	var oWorks = document.getElementById("works");
 	var aWorksLi = oWorks.getElementsByTagName("li");
-	var aWorksA = oWorks.getElementsByTagName("a");
+	//var aWorksA = oWorks.getElementsByTagName("a");
 	for(var j=0;j<aWorksLi.length;j++){
-		(function(index){
-			aWorksLi[j].onmouseover = function(){
-				move(aWorksA[index],{left:0});
-			};	
-			aWorksLi[j].onmouseout = function(){
-				move(aWorksA[index],{left:-220});
-			};	
-		})(j);
+		lagou(aWorksLi[j]);
 	}
 };
 </script>
@@ -252,9 +252,7 @@ window.onload = function(){
             	<li>..</li>
             </ol>
         </div>
-        <div class="div1">
-        	
-        </div>
+        <div class="div1"></div>
         <div class="div2" id="div2">
         	<ul id="div2_ul">
             	<li>
@@ -318,35 +316,35 @@ window.onload = function(){
         <div class="div3">
         	<ul id="works">
             	<li>
-                	<a href="autorun.html">轮播图</a>
+                	<a href="autorun.html" target="_blank">轮播图</a>
                     <img src="img/01.jpg"/>
                 </li>
             	<li>
-                	<a href="radius.html">圆周运动</a>
+                	<a href="radius.html" target="_blank">圆周运动</a>
                     <img src="img/02.jpg"/>
                 </li>
             	<li>
-                	<a href="pohto.html">照片墙</a>
+                	<a href="pohto.html" target="_blank">照片墙</a>
                     <img src="img/03.jpg"/>
                 </li>
             	<li>
-                	<a href="javascript:;">瀑布流</a>
+                	<a href="javascript:;" target="_blank">瀑布流</a>
                     <img src="img/04.jpg"/>
                 </li>
             	<li>
-                	<a href="javascript:;">扣篮</a>
+                	<a href="footboll.html" target="_blank">ball</a>
                     <img src="img/05.jpg"/>
                 </li>
             	<li>
-                	<a href="javascript:;">卖彩票</a>
+                	<a href="javascript:;" target="_blank">卖彩票</a>
                     <img src="img/06.jpg"/>
                 </li>
             	<li>
-                	<a href="javascript:;">图片</a>
+                	<a href="javascript:;" target="_blank">图片</a>
                     <img src="img/07.jpg"/>
                 </li>
             	<li>
-                	<a href="javascript:;">Apple Menu</a>
+                	<a href="javascript:;" target="_blank">Apple Menu</a>
                     <img src="img/08.jpg"/>
                 </li>
             </ul>
