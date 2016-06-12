@@ -13,7 +13,7 @@
 .wrap .box #banner{ position:fixed; right:50px; width:500px; top:50px; overflow:hidden; text-align:center; z-index:999;}
 .wrap .box #banner li{ float:left; margin:0 10px; width:100px; height:30px; font:20px/30px "微软雅黑";}
 .wrap .box .banner ol{ text-indent:2rem; width:660px; position:absolute; left:50%; top:200px; margin-left:-300px; overflow:hidden;}
-.wrap .box .banner ol li{ font:26px/40px "宋体"; float:left; opacity:0; filter:alpha(opacity:0);}
+.wrap .box .banner ol li{ font:26px/40px "宋体"; float:left; opacity:0; filter:alpha(opacity:0); color:#fff;}
 .wrap .box{ position:relative;}
 .wrap .box>div{ height:643px;}
 .wrap .box div.div1{ background:url(img/bg_12.jpg) no-repeat;}
@@ -54,7 +54,8 @@ window.onload = function(){
 	var aBannerLi = oBanner.getElementsByTagName("li");
 	
 	var oCom = document.getElementById("recommend");
- 	var aComLi = oCom.getElementsByTagName("li");
+ 	/*var aComLi = oCom.getElementsByTagName("li");*/
+	
 	var oDiv6 = document.getElementById("div6");
 	var aDivLi = oDiv6.getElementsByTagName("li");
 	//首页
@@ -91,6 +92,15 @@ window.onload = function(){
 		aDivLi[iNow].className ="active";
 		move(oBox,{"top":-aBoxDiv[0].offsetHeight*iNow},{duration:1500});
 	}
+	var str = "欢迎访问Bear的个人网站，我是一名前端工程师，热衷于学习前端各种新技术,学海无崖,当永不止步....";
+	
+	for(var i = 0;i<str.length;i++){
+		
+		var aComLi = document.createElement("li");
+		oCom.appendChild(aComLi);
+		aComLi.innerHTML = str[i];
+	}
+	var aComLi = oCom.children;
 	var i=0;
 	var timer=setInterval(function(){
 		move(aComLi[i],{opacity:1});
@@ -204,52 +214,6 @@ window.onload = function(){
         	<h3><img src="img/logo4.png"/></h3>
             <ol id="recommend">
             	<li>&nbsp;&nbsp;</li>
-            	<li>欢</li>
-            	<li>迎</li>
-            	<li>访</li>
-            	<li>问</li>
-            	<li>Bearcheng</li>
-            	<li>的</li>
-            	<li>个</li>
-            	<li>人</li>
-            	<li>网</li>
-            	<li>站</li>
-            	<li>，</li>
-            	<li>我</li>
-            	<li>是</li>
-            	<li>一</li>
-            	<li>名</li>
-            	<li>前</li>
-            	<li>端</li>
-            	<li>工</li>
-            	<li>程</li>
-            	<li>师</li>
-            	<li>，</li>
-            	<li>热</li>
-            	<li>衷</li>
-            	<li>于</li>
-            	<li>学</li>
-            	<li>习</li>
-            	<li>前</li>
-            	<li>端</li>
-            	<li>各</li>
-            	<li>种</li>
-            	<li>新</li>
-            	<li>技</li>
-            	<li>术</li>
-            	<li>,</li>
-            	<li>学</li>
-            	<li>海</li>
-            	<li>无</li>
-            	<li>崖</li>
-            	<li>,</li>
-            	<li>当</li>
-            	<li>永</li>
-            	<li>不</li>
-            	<li>止</li>
-            	<li>步</li>
-            	<li>..</li>
-            	<li>..</li>
             </ol>
         </div>
         <div class="div1"></div>
@@ -328,7 +292,7 @@ window.onload = function(){
                     <img src="img/03.jpg"/>
                 </li>
             	<li>
-                	<a href="javascript:;" target="_blank">瀑布流</a>
+                	<a href="Map.html" target="_blank">您的位置</a>
                     <img src="img/04.jpg"/>
                 </li>
             	<li>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>无标题文档</title>
+<style>  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}  
+#div1{height:100%}  
+</style>  
+<script src="http://api.map.baidu.com/api?v=1.4"></script>
+
+<script>
+window.onload = function(){
+	window.navigator.geolocation.getCurrentPosition(function(res){
+	 // 创建地图实例
+	var map = new BMap.Map("div1");          
+	// 创建点坐标 
+	var point = new BMap.Point(res.coords.longitude,res.coords.latitude); 
+	// 初始化地图，设置中心点坐标和地图级别
+	alert(point);  
+	map.centerAndZoom(point, 20);                 
+		       
+	var marker = new BMap.Marker(point);        // 创建标注    
+	map.addOverlay(marker);                     // 将标注添加到地图中
+	
+	},function(){
+		alert("失败");
+	}); 	
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
