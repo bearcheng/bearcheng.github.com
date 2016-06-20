@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+body{ background:#000; text-align:center;}
+canvas{ background:url(../img2/game_bg_2_hd.jpg);}
+</style>
+<script src="../js/common.js"></script>
+<script src="../js/sprite.js"></script>
+<script src="../js/fish.js"></script>
+<script src="../js/cannon.js"></script>
+<script src="../js/bullet.js"></script>
+<script src="../js/shark.js"></script>
+<script>
+window.onload = function(){
+	var oC = document.getElementById("c1");
+	var gd = oC.getContext('2d');
+	loadImage({
+		'bottom':'../img2/bottom.png',
+		'bullet':'../img2/bullet.png',
+		'cannon1':'../img2/cannon1.png',
+		'cannon2':'../img2/cannon2.png',
+		'cannon3':'../img2/cannon3.png',
+		'cannon4':'../img2/cannon4.png',
+		'cannon5':'../img2/cannon5.png',
+		'cannon6':'../img2/cannon6.png',
+		'cannon7':'../img2/cannon7.png',
+		'coinAni1':'../img2/coinAni1.png',
+		'fish1':'../img2/fish1.png',
+		'fish2':'../img2/fish2.png',
+		'fish3':'../img2/fish3.png',
+		'fish4':'../img2/fish4.png',
+		'fish5':'../img2/fish5.png',
+		'shark1':'../img2/shark1.png',
+		'shark2':'../img2/shark2.png'
+	},function(result){
+		var bottom = new Sprite(result.bottom);
+		bottom.w = 765;
+		bottom.h = 72;
+		bottom.x = oC.width/2;
+		bottom.y = oC.height - bottom.h/2;
+		
+		var cannon = new Cannon(result,1);
+		cannon.x = bottom.x + cannon.w/2 + 4;
+		cannon.y = bottom.y;
+		
+		oC.onmousemove = function(ev){
+			var x1 = ev.pageX - oC.offsetLeft;
+			var y1 = ev.pageY - oC.offsetTop;
+			var a = x1 - cannon.x;
+			var b = cannon.y - y1;
+			cannon.r = -a2d(Math.atan2(b,a)) + 90;	
+		};
+		//鱼
+		var aFish = [];
+		setInterval(function(){
+			var fish = new Fish(result,rnd(1,6));
+			fish.r = rnd(45,135);
+			fish.x = -50;
+			fish.y = rnd(0,oC.height);
+			aFish.push(fish);
+		},300);
+		var aShark = [];
+		setInterval(function(){
+			var shark = new Shark(result,rnd(1,3));
+			shark.r = rnd(60,150);
+			shark.x = -200;
+			shark.y = rnd(20,oC.height-20);
+			aShark.push(shark);
+		},5000);
+		
+		var aBullet = [];
+		oC.onclick = function(){
+			var audio = new Audio();
+			audio.src = "../mp3/gunShot.mp3";
+			audio.play();	
+			var bullet = new Bullet(result.bullet,cannon.type);
+			bullet.x = cannon.x;
+			bullet.y = cannon.y;
+			bullet.r = cannon.r;
+			aBullet.push(bullet);
+		};
+		setInterval(function(){
+			gd.clearRect(0,0,oC.width,oC.height);
+			bottom.draw(gd);
+			
+			//画鱼
+			for(var i = 0;i<aFish.length;i++){
+				aFish[i].move();
+				aFish[i].draw(gd);
+			}
+			for(var i = 0;i<aShark.length;i++){
+				aShark[i].move();
+				aShark[i].draw(gd);
+			}
+			//画炮弹
+			for(var i=0;i<aBullet.length;i++){
+				aBullet[i].move();
+				aBullet[i].draw(gd);	
+			}
+			//检测炮弹
+			for(var i=0;i<aBullet.length;i++){
+				if(aBullet[i].x<-50||aBullet[i].y<-50||aBullet[i].x>oC.width+50||aBullet[i].y>oC.height+50){
+					aBullet.splice(i,1);
+					i--;		
+				}	
+			}
+			//检测鱼
+			for(var i=0;i<aFish.length;i++){
+				if(aFish[i].x<-50||aFish[i].y<-50||aFish[i].x>oC.width+50||aFish[i].y>oC.height+50){
+					aFish.splice(i,1);
+					i--;		
+				}	
+			}
+			for(var i=0;i<aBullet.length;i++){
+				for(var j = 0;j<aFish.length;j++){
+					if(aBullet[i].collTest(aFish[j])){
+						aBullet.splice(i,1);
+						i--;
+						aFish.splice(j,1);
+						j--;
+					}
+				}
+			}
+			cannon.draw(gd);
+		},30);
+		//活鱼
+		setInterval(function(){
+			for(var i=0;i<aFish.length;i++){
+					aFish[i].swim();
+			}
+		},200);
+		setInterval(function(){
+			for(var i=0;i<aShark.length;i++){
+					aShark[i].swim2();
+			}
+		},200);
+	});	
+};
+</script>
+</head>
+
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

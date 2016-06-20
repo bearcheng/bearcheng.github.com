@@ -12,8 +12,8 @@
 .wrap .box .banner{ width:100%; position:absolute; top:0; left:0;}
 .wrap .box #banner{ position:fixed; right:50px; width:500px; top:50px; overflow:hidden; text-align:center; z-index:999;}
 .wrap .box #banner li{ float:left; margin:0 10px; width:100px; height:30px; font:20px/30px "微软雅黑";}
-.wrap .box .banner ol{ text-indent:2rem; width:660px; position:absolute; left:50%; top:200px; margin-left:-300px; overflow:hidden;}
-.wrap .box .banner ol li{ font:26px/40px "宋体"; float:left; opacity:0; filter:alpha(opacity:0); color:#fff;}
+.wrap .box .banner ol{ text-indent:2rem; width:660px; height:250px; text-shadow:0 0 0 rgba(255,255,255,1); position:absolute; left:50%; top:200px; margin-left:-300px; overflow:hidden; background:#000; opacity:0.7;}
+.wrap .box .banner ol li{ font:bold 26px/40px "宋体"; float:left; opacity:0; filter:alpha(opacity:0); color:#fff;}
 .wrap .box{ position:relative;}
 .wrap .box>div{ height:643px;}
 .wrap .box div.div1{ background:url(img/bg_12.jpg) no-repeat;}
@@ -28,7 +28,7 @@ background:#ccc; border-radius:50%;}
 .wrap .box div.div6 ul li.active,#banner li.active{ background:#9F0;}
 .wrap .box div.div2 ul{ -position:absolute; width:100%; overflow:hidden;margin:0 auto; overflow:hidden;}
 
-.wrap .box div.div2 ul li{ position:relative;width:265px; border:1px solid #ccc; margin-left:-1px; margin-bottom:-1px; float:left; -background:#999; color:#333;height:150px;overflow:hidden;}
+.wrap .box div.div2 ul li{ position:relative;width:240px; height:150px; border:1px solid #ccc; float:left; color:#333;overflow:hidden; margin: 20px 10px;}
 div.div2 ul li div{ position:absolute; left:-266px; width:100%;height:150px; background:#7de87d; opacity:.7;}
 div.div2 ul li h3{ position:absolute;right:15px; top:20px;font:bold 40px/1.7 "impact";}
 div.div2 ul li span{position:absolute;right:10px;top:80px;}
@@ -38,6 +38,12 @@ div.div2 ul li img{ width:100%;}
 .div3 #works li{position:relative; float:left; width:220px; height:175px; border:1px solid #ccc; margin:5px; overflow:hidden;}
 .div3 #works li img{ width:100%; height:100%;}
 .div3 #works li a{ position:absolute; left:-220px; width:220px; height:175px; text-align:center; font:bold 20px/175px "微软雅黑";color:#FF0; background:#0F0; opacity:.7;}
+.div4{ position:relative;}
+.div4 .me{ width:600px; height:400px; border:2px solid #fff; position:absolute; left:50%; top:50%; margin-left:-300px; margin-top:-200px; background:rgba(153,153,153,0.5); padding:20px;}
+.me p{ font:bold 30px/50px "kaiti"; }
+.me ul{ width:100%; margin:20px;}
+.me ul li{ font:24px/3 "kaiti"; }
+.me ul li:nth-child(3){ margin-left:380px; margin-top:80px;}
 </style>
 <script src="js/move.js"></script>
 <script src="js/addMouseWheel.js"></script>
@@ -92,7 +98,7 @@ window.onload = function(){
 		aDivLi[iNow].className ="active";
 		move(oBox,{"top":-aBoxDiv[0].offsetHeight*iNow},{duration:1500});
 	}
-	var str = "欢迎访问Bear的个人网站，我是一名前端工程师，热衷于学习前端各种新技术,学海无崖,当永不止步....";
+	var str = "欢迎访问Bear的个人网站，我是一名前端工程师，热衷于学习前端各种新技术,不断完善、强大自己....";
 	
 	for(var i = 0;i<str.length;i++){
 		
@@ -165,10 +171,10 @@ window.onload = function(){
 			var oEvent = ev || event;
 			var n = getDir(oEvent,this);
 			var oSpan = this.children[0];
-			var r = parseInt(Math.random()*256);
-			var g = parseInt(Math.random()*256);
-			var b = parseInt(Math.random()*256);
-			oSpan.style.background = "rgb("+r+","+g+","+b+")"
+			//var r = parseInt(Math.random()*256);
+			//var g = parseInt(Math.random()*256);
+			//var b = parseInt(Math.random()*256);
+			oSpan.style.background = "#ccc"
 			var oTo = oEvent.toElement || oEvent.relatedTarget;
 			if(oTo && obj.contains(oTo)){
 				return;
@@ -280,28 +286,28 @@ window.onload = function(){
         <div class="div3">
         	<ul id="works">
             	<li>
-                	<a href="autorun.html" target="_blank">轮播图</a>
+                	<a href="html/autorun.html" target="_blank">轮播图</a>
                     <img src="img/01.jpg"/>
                 </li>
             	<li>
-                	<a href="radius.html" target="_blank">圆周运动</a>
-                    <img src="img/02.jpg"/>
+                	<a href="html/radius.html" target="_blank">圆周运动</a>
+                    <img src="img/Circular.jpg"/>
                 </li>
             	<li>
-                	<a href="pohto.html" target="_blank">照片墙</a>
+                	<a href="html/pohto.html" target="_blank">照片墙</a>
                     <img src="img/03.jpg"/>
                 </li>
             	<li>
-                	<a href="Map.html" target="_blank">您的位置</a>
-                    <img src="img/04.jpg"/>
+                	<a href="html/Map.html" target="_blank">您的位置</a>
+                    <img src="img/map.jpg"/>
                 </li>
             	<li>
-                	<a href="footboll.html" target="_blank">ball</a>
-                    <img src="img/05.jpg"/>
+                	<a href="html/footboll.html" target="_blank">ball</a>
+                    <img src="img/ball.jpg"/>
                 </li>
             	<li>
-                	<a href="javascript:;" target="_blank">卖彩票</a>
-                    <img src="img/06.jpg"/>
+                	<a href="html/fish.html" target="_blank">捕鱼达人</a>
+                    <img src="img/fish.jpg"/>
                 </li>
             	<li>
                 	<a href="javascript:;" target="_blank">图片</a>
@@ -313,7 +319,16 @@ window.onload = function(){
                 </li>
             </ul>
         </div>
-        <div class="div4"></div>
+        <div class="div4">
+        	<div class="me">
+            	<p>如果您对我的作品感兴趣的话，请联系我</p>
+                <ul>
+                    <li>手机号：13367249499</li>
+                    <li>email:xiongcheng247406@sina.com</li>
+                    <li>期待您的来电</li>
+                </ul>
+          	</div>
+        </div>
         <div class="div5"></div>
         <div class="div6" id="div6">
         	<ul>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>轮播图</title>
-<link href="css.css" rel="stylesheet" type="text/css" />
+<link href="../css/css.css" rel="stylesheet"/>
 <script>
 window.onload = function(){
 	var oPlay = document.getElementById("play");
@@ -15,7 +15,7 @@ window.onload = function(){
 	var timer = null;
 	function next(){
 		iNow++;
-		if(iNow==4){
+		if(iNow==aBtn.length){
 			iNow=0;
 		}
 		tab();	
@@ -28,12 +28,12 @@ window.onload = function(){
 			}	
 		})(i);		
 	}
-	timer = setInterval(next,1000);
+	timer = setInterval(next,3000);
 	oUl.onmouseover = function(){
 		clearInterval(timer);	
 	}
 	oUl.onmouseout = function(){
-		timer = setInterval(next,1000);
+		timer = setInterval(next,3000);
 	}
 	
 	function tab(){
@@ -59,11 +59,11 @@ window.onload = function(){
         <li>5</li>
     </ol>
 	<ul>
-		<li><a href="javascript:;"><img src="img/bg_04.jpg" alt="广告一" /></a></li>
-		<li><a href="javascript:;"><img src="img/bg_05.jpg" alt="广告二" /></a></li>
-		<li><a href="javascript:;"><img src="img/bg_06.jpg" alt="广告三" /></a></li>
-		<li><a href="javascript:;"><img src="img/bg_07.jpg" alt="广告四" /></a></li>
-		<li><a href="javascript:;"><img src="img/bg_08.jpg" alt="广告五" /></a></li>
+		<li><a href="javascript:;"><img src="../img/sea4.jpg" alt="广告四" /></a></li>
+		<li><a href="javascript:;"><img src="../img/sea6.jpg" alt="广告一" /></a></li>
+		<li><a href="javascript:;"><img src="../img/sea7.jpg" alt="广告二" /></a></li>
+		<li><a href="javascript:;"><img src="../img/sea8.jpg" alt="广告三" /></a></li>
+		<li><a href="javascript:;"><img src="../img/sea5.jpg" alt="广告五" /></a></li>
 	</ul>
 </div>
 </body>
